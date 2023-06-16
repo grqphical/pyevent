@@ -1,7 +1,7 @@
 site_name: PyEvent
 repo_url: https://github.com/grqphical07/pyevent
 repo_name: pyevent
-edit_uri: edit/main/docs/
+edit_uri: edit/master/docs/
 theme:
   name: material
   features:
