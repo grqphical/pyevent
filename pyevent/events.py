@@ -1,13 +1,11 @@
 """Script that hold the main event class"""
 from functools import wraps
 from .exceptions import *
-import asyncio
 
 class Event:
     """Primary Event Class"""
     def __init__(self):
         self._registered_functions:list[function] = []
-        self.loop = asyncio.get_event_loop()
     
     def register(self, func):
         """Registers a function to the event"""
@@ -28,13 +26,21 @@ class Event:
                 raise FunctionNotRegistered("Function has not been registered to the event")
         return wrapper()
     
-    async def _trigger(self, args, kwargs):
-        """Runs the event"""
-        tasks = [asyncio.ensure_future(coro(args, kwargs)) for coro in self._registered_functions]
-        await asyncio.wait(tasks)
+    def __iadd__(self, other):
+        self.register(other)
+        return self
+    
+    def __isub__(self, other):
+        self.unregister(other)
+        return self
     
     def trigger(self, *args, **kwargs):
-        asyncio.run(self._trigger(args, kwargs))
+        """Calls all registered functions"""
+        if len(self._registered_functions) == 0:
+            raise NoFunctionsRegistered()
+        
+        for func in self._registered_functions:
+            func(*args, **kwargs)
         
     @property
     def registered_functions(self) -> list:

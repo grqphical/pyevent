@@ -4,7 +4,7 @@
 [![GitHub license](https://badgen.net/github/license/grqphical07/pyevent)](https://github.com/grqphical07/pyevent/blob/master/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/grqphical07/pyevent.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/grqphical07/pyevent/stargazers/)
 
-A simple event system made for Python 3 that supports synchronous and asynchronous events
+A simple, asynchronous event system made for Python 3
 
 ## Installation
 
@@ -45,7 +45,7 @@ event.trigger(message="Hello World")
 ```
 ## Async events
 
-PyEvent also works with coroutines. Use the ```AsyncEvent``` class for this functionality
+PyEvent also works with coroutines. Use the [```AsyncEvent```](/async_event/) class for this functionality
 ```python
 from pyevent import AsyncEvent
 
@@ -63,7 +63,7 @@ event.trigger()
 
 ## Using Event Groups
 
-If you have many events you want to organize into a single variable you can use event groups
+If you have many events you want to organize into a single variable you can use [```EventGroups```](/event_group/)
 ```python
 from pyevent import Event
 from pyevent import EventGroup
@@ -86,11 +86,3 @@ event_group.trigger_event("Test")
 # This will call every linked event
 event_group.trigger_all()
 ```
-
-## Docs
-
-To view the docs make sure you have **mkdocs** and **mkdocs-material** installed (```pip install mkdocs mkdocs-material```) and just run ```python -m mkdocs serve```
-
-## License
-
-This is under the MIT license so feel free to make any changes you want to it
